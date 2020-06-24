@@ -2,11 +2,11 @@ SC_BEGIN_PACKAGE(IPGP)
 
 OPTION(SC_IPGP_HYPO71 "Build Hypo71 which requires a fortran compiler" ON)
 
-IF(CMAKE_COMPILER_IS_GNUCC)
-	IF(GCC_VERSION VERSION_LESS "4.7")
-		MESSAGE(FATAL_ERROR "GCC version ${GCC_VERSION} found but 4.7 required as minimum")
-	ENDIF()
-ENDIF()
+IF (NOT MACOSX)
+    IF(GCC_VERSION VERSION_LESS "4.7")
+	    MESSAGE(FATAL_ERROR "GCC version ${GCC_VERSION} found but 4.7 required as minimum")
+    ENDIF(GCC_VERSION VERSION_LESS "4.7")
+ENDIF (NOT MACOSX)
 
 SET(Boost_DETAILED_FAILURE_MSG ON)
 FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options thread filesystem iostreams regex)
